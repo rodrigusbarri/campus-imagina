@@ -1,0 +1,13 @@
+.header-container {
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; 
+  margin: 0px;
+  padding: 20px;
+  border: 100px;
+  padding: 20px 20px;
+  z-index: 5;
+  background:#1a202c;
+  }
