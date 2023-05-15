@@ -12,7 +12,7 @@ import { Ruta } from '../pages/ruta/Ruta'
 export function MyRoutes() {
   return (
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/certificaciones" element={<Certificaciones />} />
         <Route path="/comunidad" element={<Comunidad />} />
