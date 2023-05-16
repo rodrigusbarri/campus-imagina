@@ -17,9 +17,7 @@ import {
   import { ArrowRightIcon } from "@chakra-ui/icons";
   
   export function CardCursos() {
-    const { data, loading, error } = UserApi("http://localhost:1337/api/cursos");
-  
-    console.log(data);
+    const { data, loading, error } = UserApi(import.meta.env.VITE_URL_API_CURSOS);
   
     return (
       <section>
@@ -62,9 +60,6 @@ import {
                     <Button variant="solid" colorScheme="twitter">
                       Iniciar Curso
                     </Button>
-                    {/* <Button variant="solid" colorScheme="blue">
-                      Comprar Curso
-                      </Button> */}
                   </ButtonGroup>
                 </CardFooter>
               </Card>

@@ -8,12 +8,14 @@ import { Favoritos } from '../pages/favoritos/Favoritos'
 import { Foros } from '../pages/foros/Foros'
 import { Novedades } from '../pages/novedades/Novedades'
 import { Ruta } from '../pages/ruta/Ruta'
+import { LoginPage } from "../components/LoginPage";
 
 export function MyRoutes() {
   return (
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/cursos" element={<Cursos />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/certificaciones" element={<Certificaciones />} />
         <Route path="/comunidad" element={<Comunidad />} />
         <Route path="/empleo" element={<Empleo />} />

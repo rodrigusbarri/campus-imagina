@@ -5,13 +5,14 @@ import './App.css'
 import { MyRoutes } from './routers/routes';
 import Header from './components/Header';
 
-
 function App() {
   return (
     <>
       <BrowserRouter>
         <div>
+          <div>
           <Header />
+          </div>
           <MyRoutes />
         </div>
       </BrowserRouter>
