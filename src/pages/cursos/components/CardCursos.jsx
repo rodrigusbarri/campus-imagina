@@ -19,20 +19,30 @@ import {
   ModalCloseButton,
   ModalFooter,
   ModalBody,
-  VStack
+  VStack,
+  Badge
 } from "@chakra-ui/react";
 import React from "react";
 import { UserApi } from "../../../api/UserApi";
 import { ArrowRightIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function CardCursos() {
   const { data, loading, error } = UserApi(import.meta.env.VITE_URL_API_CURSOS);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedCurso, setSelectedCurso] = React.useState(null);
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  
 
   const openModal = (curso) => {
     setSelectedCurso(curso);
     onOpen();
+  };
+
+
+  const goToDetalle = (selectedCurso) => {
+    navigate("/detalle", { state: selectedCurso });
   };
 
   return (
@@ -114,7 +124,11 @@ export function CardCursos() {
               align='stretch'>
             <Text align='justify'>{selectedCurso?.attributes.descripcion}</Text>
             {/* Otros detalles del curso */}
-            <Text align='end'>Nivel: {selectedCurso?.attributes.nivel}</Text>
+            
+            <Text align='end'><Badge colorScheme='green' alignItems='end' fontSize='0.9em'>Nivel: {selectedCurso?.attributes.nivel}
+            </Badge>
+            </Text>
+            
             <Text align={'start'} fontSize='sm'>
               Modulos: {selectedCurso?.attributes.modulos}
             </Text>
@@ -130,7 +144,7 @@ export function CardCursos() {
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Cerrar
             </Button>
-            <Button colorScheme="blue" mr={3} onClick={''}>
+            <Button colorScheme="blue" mr={3} onClick={() => goToDetalle(selectedCurso)}>
               Iniciar
             </Button>
           </ModalFooter>

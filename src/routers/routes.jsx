@@ -9,10 +9,12 @@ import { Novedades } from '../pages/novedades/Novedades'
 import { Ruta } from '../pages/ruta/Ruta'
 import { LoginPage } from "../components/LoginPage";
 import { Home } from "../pages/home/Home";
+import { DetalleCurso } from "../pages/cursos/components/DetalleCurso";
 
 export function MyRoutes() {
   return (
       <Routes>
+        <Route path="/detalle" element={<DetalleCurso />} />
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cursos" element={<Cursos />} />
