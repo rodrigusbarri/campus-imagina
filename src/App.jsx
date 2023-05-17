@@ -1,17 +1,25 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css'
-// import Header from './components/Header';
-// import { Home } from './pages/home/Home';
 import { MyRoutes } from './routers/routes';
+import { useEffect } from "react";
+import { useState } from "react";
 import Header from './components/Header';
 
+
 function App() {
+
   return (
     <>
       <BrowserRouter>
         <div>
           <div>
-          <Header />
+            {
+              location.pathname !== '/'
+                ? (
+                  <Header />
+                )
+                : null
+            }
           </div>
           <MyRoutes />
         </div>

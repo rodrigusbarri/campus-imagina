@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from '../pages/home/Home';
 import { Cursos } from '../pages/cursos/Cursos';
 import { Certificaciones } from '../pages/certificaciones/Certificaciones'
 import { Comunidad } from '../pages/comunidad/Comunidad'
@@ -9,11 +8,13 @@ import { Foros } from '../pages/foros/Foros'
 import { Novedades } from '../pages/novedades/Novedades'
 import { Ruta } from '../pages/ruta/Ruta'
 import { LoginPage } from "../components/LoginPage";
+import { Home } from "../pages/home/Home";
 
 export function MyRoutes() {
   return (
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/home" element={<Home />} />
         <Route path="/certificaciones" element={<Certificaciones />} />

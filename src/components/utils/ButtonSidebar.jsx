@@ -24,6 +24,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import logoImagina from "../../assets/images/logo-imagina.jpg";
+import { Logout } from "./Logout";
 
 export function ButtonSidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -96,11 +97,18 @@ export function ButtonSidebar() {
               Favoritos
             </Link>
           </Stack>
+          {
+              localStorage.getItem('token')
+                ? (
+                  <Logout />
+                )
+                : <Button colorScheme="twitter" mr={3} onClick={onClose}>
+                Iniciar Sesión
+              </Button>
+            }
           <DrawerFooter>
-            <Button colorScheme="twitter" mr={3} onClick={onClose}>
-              Iniciar Sesión
-            </Button>
-            <Button colorScheme="twitter">Registrarse</Button>
+ 
+            {/* <Button colorScheme="twitter">Registrarse</Button> */}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

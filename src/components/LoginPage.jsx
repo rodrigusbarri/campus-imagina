@@ -16,7 +16,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 //import { useForm } from "react-hook-form";
 import { UserApi } from "../api/UserApi";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 
 export function LoginPage() {
@@ -51,9 +51,20 @@ export function LoginPage() {
       }
     });
     
-    const isValid = !!mapeado.find(usuario => usuario.name === username && usuario.password === password);
-    mensaje = isValid ? navigate('/home') : 'Credenciales invalidas';
-    setError(mensaje);
+     const isValid = !!mapeado.find(usuario => usuario.name === username && usuario.password === password);
+    // mensaje = isValid ? navigate('/home') : 'Credenciales invalidas';
+    // setError(mensaje);
+    
+   
+    if (isValid) {
+      const usuario = mapeado.find(usuario => usuario.name === username && usuario.password === password);
+      localStorage.setItem('token', usuario.token);
+      navigate('/home');
+      
+      
+    } else {
+      setError('Credenciales inválidas');
+    }
     
    
   }
