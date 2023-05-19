@@ -11,10 +11,10 @@ import { LoginPage } from "../components/LoginPage";
 import { Home } from "../pages/home/Home";
 import { DetalleCurso } from "../pages/cursos/components/DetalleCurso";
 
+
 export function MyRoutes() {
   return (
       <Routes>
-        <Route path="/detalle" element={<DetalleCurso />} />
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/cursos" element={<Cursos />} />
@@ -26,6 +26,7 @@ export function MyRoutes() {
         <Route path="/foros" element={<Foros />} />
         <Route path="/novedades" element={<Novedades />} />
         <Route path="/ruta" element={<Ruta />} />
+        <Route path="/detalle" element={<DetalleCurso />} />
       </Routes>
   );
 }

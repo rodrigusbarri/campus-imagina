@@ -61,25 +61,25 @@ export function CardCursos() {
           templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
         >
           {data?.map((curso) => (
-            <Card key={curso.id}>
+            <Card
+            key={curso.id} 
+            onClick={() => openModal(curso)}
+            cursor='pointer'
+            _hover={{ bg: "blue.100" }}>
               <CardBody>
                 <Image src={curso.attributes.imagen_url} borderRadius="lg" />
                 <Stack mt="4" spacing="3">
                   <Heading as="h4" size="md">
                     {curso.attributes.nombre}
                   </Heading>
-                  <Text color="black.600" fontSize="md" align="right">
-                    Nivel: {curso.attributes.nivel}
-                  </Text>
+ 
                 </Stack>
               </CardBody>
               <Divider />
               <CardFooter>
-                <ButtonGroup spacing="10">
-                  <Button onClick={() => openModal(curso)}>
-                    Ver más
-                  </Button>
-                </ButtonGroup>
+              <Text color="black.600" fontSize="md" align="right">
+                    Nivel: {curso.attributes.nivel}
+                  </Text>
               </CardFooter>
             </Card>
           ))}

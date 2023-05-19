@@ -100,15 +100,13 @@ export function ButtonSidebar() {
           {
               localStorage.getItem('token')
                 ? (
-                  <Logout />
+                  <Logout onClose={()=>onClose()}/>
                 )
                 : <Button colorScheme="twitter" mr={3} onClick={onClose}>
                 Iniciar Sesión
               </Button>
             }
           <DrawerFooter>
- 
-            {/* <Button colorScheme="twitter">Registrarse</Button> */}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

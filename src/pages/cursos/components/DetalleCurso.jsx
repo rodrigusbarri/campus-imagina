@@ -4,6 +4,8 @@ import { Heading, Box, Image, Tab, Tabs, TabList, TabPanels, TabPanel,SimpleGrid
 import { PanelMenu } from 'primereact/panelmenu';
 import { useLocation } from "react-router-dom";
 import ModulosCursos from "../../../components/utils/ModulosCursos";
+import CarouselCursos from "./CarouselCursos";
+
 
 export function DetalleCurso() {
   //const data = UserApi(import.meta.env.VITE_URL_API_CURSOS);
@@ -62,6 +64,9 @@ export function DetalleCurso() {
           </TabPanels>
         </Tabs>
         </SimpleGrid>
+      </div>
+      <div>
+      <CarouselCursos />
       </div>
     </>
   );
