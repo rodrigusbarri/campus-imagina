@@ -1,22 +1,36 @@
 import { Routes, Route } from "react-router-dom";
-import { Cursos } from '../pages/cursos/Cursos';
-import { Certificaciones } from '../pages/certificaciones/Certificaciones'
-import { Comunidad } from '../pages/comunidad/Comunidad'
-import { Empleo } from '../pages/empleo/Empleo'
-import { Favoritos } from '../pages/favoritos/Favoritos'
-import { Foros } from '../pages/foros/Foros'
-import { Novedades } from '../pages/novedades/Novedades'
-import { Ruta } from '../pages/ruta/Ruta'
+import { Cursos } from "../pages/cursos/Cursos";
+import { Certificaciones } from "../pages/certificaciones/Certificaciones";
+import { Comunidad } from "../pages/comunidad/Comunidad";
+import { Empleo } from "../pages/empleo/Empleo";
+import { Favoritos } from "../pages/favoritos/Favoritos";
+import { Foros } from "../pages/foros/Foros";
+import { Novedades } from "../pages/novedades/Novedades";
+import { Ruta } from "../pages/ruta/Ruta";
 import { LoginPage } from "../components/LoginPage";
 import { Home } from "../pages/home/Home";
 import { DetalleCurso } from "../pages/cursos/components/DetalleCurso";
+import { useState, useEffect, createContext } from "react";
+import { Perfil } from "../pages/perfil/Perfil";
 
-
+export const UserContext = createContext();
 export function MyRoutes() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  const userData = (usuario) => {
+    setUser(usuario);
+  };
+
   return (
+    <UserContext.Provider value={user}>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage userData={userData} />} />
+        {/* <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/perfil" element={<Perfil />} />
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/home" element={<Home />} />
         <Route path="/certificaciones" element={<Certificaciones />} />
@@ -28,5 +42,6 @@ export function MyRoutes() {
         <Route path="/ruta" element={<Ruta />} />
         <Route path="/detalle" element={<DetalleCurso />} />
       </Routes>
+    </UserContext.Provider>
   );
 }

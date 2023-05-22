@@ -6,26 +6,36 @@ import { useState } from "react";
 import Header from './components/Header';
 
 
-function App() {
+function Child({handleClick}) {
+  return <button onClick={handleClick}>Increment</button>;
+}
 
+
+function App() {
+  // const [count, setCount] = useState(0);
+
+  // function handleClick() {
+  //   console.log('Function ran in Child component');
+  //   setCount(count + 1);
+  
+  
   return (
-    <>
-      <BrowserRouter>
+   <>
+  
+
+   <BrowserRouter>
         <div>
           <div>
-            {
-              location.pathname !== '/'
-                ? (
-                  <Header />
-                )
-                : null
-            }
           </div>
           <MyRoutes />
         </div>
       </BrowserRouter>
-    </>
+    </> 
+
+
   );
 }
 
 export default App
+
+    

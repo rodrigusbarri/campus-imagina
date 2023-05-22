@@ -28,7 +28,8 @@ import logoImagina from "../assets/images/logo-imagina.jpg";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-export function LoginPage() {
+
+export function LoginPage({userData}) {
   const data = UserApi(import.meta.env.VITE_URL_API_USUARIOS);
   const [username, setUsername] = useState(""); // Estado para almacenar el valor del nombre de usuario
   const [password, setPassword] = useState(""); // Estado para almacenar el valor de la contraseña
@@ -116,11 +117,15 @@ export function LoginPage() {
 
       if (isValid) {
         // Iniciar sesión exitosamente
-        const usuario = data.data.find(
-          (usuario) =>
-            usuario.attributes.email === username &&
+        const usuario = data.data.find((usuario) => usuario.attributes.email === username &&
             usuario.attributes.password === password
         );
+          userData({
+          username: usuario.attributes.email,
+          password: usuario.attributes.password,
+          nombre: usuario.attributes.nombre
+        })
+
         localStorage.setItem("token", usuario.attributes.token);
         setIsLoggedIn(true);
 
@@ -426,7 +431,7 @@ export function LoginPage() {
                         <Stack pt={6}>
                           <Text align={"center"}>
                             Ya eres usuario?{" "}
-                            <Link color={"blue.400"}>Iniciar sesión</Link>
+                            <Link onClick={()=> onClose()} color={"blue.400"}>Iniciar sesión</Link>
                           </Text>
                         </Stack>
                       </Stack>

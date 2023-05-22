@@ -2,6 +2,7 @@ import '../cursos/styles/Cursos.css'
 import { CardCursos } from "./components/CardCursos";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from '../../components/Header'
 
 
 export function Cursos() {
@@ -22,6 +23,7 @@ export function Cursos() {
 
   return (
     <>
+    <Header />
     <section>
       <h1 className="cursos-container">Cursos disponibles</h1>
       <CardCursos />
