@@ -7,6 +7,7 @@ export function Logout(props){
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('perfil');
         navigate("/");
         props.onClose()
     }

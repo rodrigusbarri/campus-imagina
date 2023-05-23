@@ -22,14 +22,14 @@ import {
   ModalContent,
   Image,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { UserApi } from "../api/UserApi";
 import logoImagina from "../assets/images/logo-imagina.jpg";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-
-export function LoginPage({userData}) {
+export function LoginPage({ userData }) {
   const data = UserApi(import.meta.env.VITE_URL_API_USUARIOS);
   const [username, setUsername] = useState(""); // Estado para almacenar el valor del nombre de usuario
   const [password, setPassword] = useState(""); // Estado para almacenar el valor de la contraseña
@@ -117,16 +117,28 @@ export function LoginPage({userData}) {
 
       if (isValid) {
         // Iniciar sesión exitosamente
-        const usuario = data.data.find((usuario) => usuario.attributes.email === username &&
+        const usuario = data.data.find(
+          (usuario) =>
+            usuario.attributes.email === username &&
             usuario.attributes.password === password
         );
-          userData({
-          username: usuario.attributes.email,
+        const userData = {
+          username: usuario.attributes.username,
           password: usuario.attributes.password,
-          nombre: usuario.attributes.nombre
-        })
+          email: usuario.attributes.email,
+          nombre: usuario.attributes.nombre,
+          apellidos: usuario.attributes.apellidos,
+          direccion: usuario.attributes.direccion,
+          telefono: usuario.attributes.telefono,
+          provincia: usuario.attributes.provincia,
+          pais: usuario.attributes.pais,
+          ciudad: usuario.attributes.ciudad,
+          avatar: usuario.attributes.avatar,
+          fechaNacimiento: usuario.attributes.fechaNacimiento,
+        };
 
         localStorage.setItem("token", usuario.attributes.token);
+        localStorage.setItem("perfil", JSON.stringify(userData));
         setIsLoggedIn(true);
 
         // Almacenar el nombre de usuario si "Recuérdame" está seleccionado
@@ -215,14 +227,39 @@ export function LoginPage({userData}) {
                 </FormControl>
                 <FormControl id="password">
                   <FormLabel>Contraseña</FormLabel>
-                  <Input
-                    value={password}
-                    onChange={handlePasswordChange}
-                    type="password"
-                    placeholder="••••••••••"
-                    required
-                    onKeyDown={handlePasswordKeyDown}
-                  />
+   
+                          <InputGroup>
+                          <p className="error"></p>
+                            <Input
+                              name="password"
+                              onChange={handlePasswordChange}
+                              onKeyDown={handlePasswordKeyDown}
+                              value={password}
+                              type={showPassword ? "text" : "password"}
+                              placeholder="••••••••••"
+                              _placeholder={{ color: "gray.500" }}
+                              className="form-control inp_text"
+                              id="password"
+                              required
+                            />
+                            <p className="error">
+                              {error.password &&
+                                touched.password &&
+                                error.password}
+                            </p>
+
+                            <InputRightElement width="4.5rem">
+                              <Button
+                                h="1.75rem"
+                                size="sm"
+                                onClick={() => setShowPassword(!showPassword)}
+                              >
+                                {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                              </Button>
+                            </InputRightElement>
+                          </InputGroup>
+
+
                 </FormControl>
                 <Stack spacing={10}>
                   <Stack
@@ -382,15 +419,17 @@ export function LoginPage({userData}) {
                         </FormControl>
                         <FormControl id="password" isRequired>
                           <FormLabel>Contraseña</FormLabel>
+
                           <InputGroup>
-                            <p className="error"></p>
+                          <p className="error"></p>
                             <Input
-                              type={showPassword ? "text" : "password"}
                               name="password"
                               onChange={handleChange}
                               onBlur={handleBlur}
                               value={values.password}
+                              type={showPassword ? "text" : "password"}
                               placeholder="Ingrese una contraseña"
+                              _placeholder={{ color: "gray.500" }}
                               className="form-control inp_text"
                               id="password"
                             />
@@ -400,19 +439,18 @@ export function LoginPage({userData}) {
                                 errors.password}
                             </p>
 
-                            <InputRightElement h={"full"}>
+                            {/* <InputRightElement width="4.5rem">
                               <Button
-                                variant={"ghost"}
-                                onClick={() =>
-                                  setShowPassword(
-                                    (showPassword) => !showPassword
-                                  )
-                                }
+                                h="1.75rem"
+                                size="sm"
+                                onClick={() => setShowPassword(!showPassword)}
                               >
-                                {/* {showPassword ? <ViewIcon /> : <ViewOffIcon />} */}
+                                {showPassword ? <ViewOffIcon /> : <ViewIcon />}
                               </Button>
-                            </InputRightElement>
+                            </InputRightElement> */}
                           </InputGroup>
+
+
                         </FormControl>
                         <Stack spacing={10} pt={2}>
                           <Button
@@ -431,7 +469,9 @@ export function LoginPage({userData}) {
                         <Stack pt={6}>
                           <Text align={"center"}>
                             Ya eres usuario?{" "}
-                            <Link onClick={()=> onClose()} color={"blue.400"}>Iniciar sesión</Link>
+                            <Link onClick={() => onClose()} color={"blue.400"}>
+                              Iniciar sesión
+                            </Link>
                           </Text>
                         </Stack>
                       </Stack>

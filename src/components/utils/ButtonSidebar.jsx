@@ -19,14 +19,25 @@ import {
   Box,
   Image,
   Text,
+  Avatar,
+  AvatarBadge,
+  Center,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
+import { useContext } from "react";
 import { useDisclosure } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import logoImagina from "../../assets/images/logo-imagina.jpg";
 import { Logout } from "./Logout";
+import { UserContext } from "../../routers/routes";
+
 
 export function ButtonSidebar() {
+  const user = useContext(UserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -39,7 +50,7 @@ export function ButtonSidebar() {
           as={IconButton}
           aria-label="Options"
           icon={<HamburgerIcon />}
-          variant='solid'
+          variant="solid"
           onClick={onOpen}
         />
       </Menu>
@@ -54,17 +65,46 @@ export function ButtonSidebar() {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>
-            <Image
-              boxSize="40px"
-              borderRadius="full"
-              src={logoImagina}
-              alt="logo Imagina"
-            />
-            <Text align="center">Campus Imagina</Text>
+            <Grid
+              templateColumns="repeat(8, 1fr)"
+              gap={1}
+              alignItems={"flex-start"}
+            >
+              <GridItem w="16" h="10">
+                <Image
+                  boxSize="40px"
+                  borderRadius="full"
+                  src={logoImagina}
+                  alt="logo Imagina"
+                />
+              </GridItem>
+              <GridItem w="60" h="10">
+                <Text align="left" textAlign={"left"}>
+                  Campus Imagina
+                </Text>
+              </GridItem>
+            </Grid>
+
+            <Stack
+              divider={<StackDivider borderColor="gray.200" />}
+              m="3"
+              direction="column"
+              spacing={2}
+              align="start"
+            >
+              <FormControl id="userName">
+                <Stack direction={["column"]} spacing={6}>
+                  <Center>
+                    <Avatar size="xl" src={user?.avatar}></Avatar>
+                  </Center>
+                </Stack>
+                <FormLabel textAlign={"center"}>{user?.username}</FormLabel>
+              </FormControl>
+            </Stack>
           </DrawerHeader>
           <Stack
             divider={<StackDivider borderColor="gray.200" />}
-            m="10"
+            m="2"
             direction="column"
             spacing={2}
             align='"flex"'
@@ -97,17 +137,14 @@ export function ButtonSidebar() {
               Favoritos
             </Link>
           </Stack>
-          {
-              localStorage.getItem('token')
-                ? (
-                  <Logout onClose={()=>onClose()}/>
-                )
-                : <Button colorScheme="twitter" mr={3} onClick={onClose}>
-                Iniciar Sesión
-              </Button>
-            }
-          <DrawerFooter>
-          </DrawerFooter>
+          {localStorage.getItem("token") ? (
+            <Logout onClick={() => onClose()} />
+          ) : (
+            <Button colorScheme="twitter" mr={3} onClick={onClose}>
+              Iniciar Sesión
+            </Button>
+          )}
+          <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

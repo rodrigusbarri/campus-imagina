@@ -17,6 +17,7 @@ export function ButtonPerfil() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem('perfil')
     //localStorage.removeItem('username');
     navigate("/");
     props.onClose();

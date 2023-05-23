@@ -1,37 +1,35 @@
 import { Heading, Box, Image, Tab, Tabs, TabList, TabPanels, TabPanel,SimpleGrid } from "@chakra-ui/react";
-//import { UserApi } from "../../../api/UserApi";
-//import { ArrowRightIcon } from "@chakra-ui/icons";
-import { PanelMenu } from 'primereact/panelmenu';
-import { useLocation } from "react-router-dom";
-import ModulosCursos from "../../../components/utils/ModulosCursos";
-import CarouselCursos from "./CarouselCursos";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { UserContext } from "../../../routers/routes";
+import { useContext, useEffect } from "react";
+import Header from "../../../components/Header";
+
 
 
 export function DetalleCurso() {
-  //const data = UserApi(import.meta.env.VITE_URL_API_CURSOS);
-  //const navigate = useNavigate();
   const { state } = useLocation();
+  const user = useContext(UserContext);
+  const navigate = useNavigate();
 
 
 
-  
-    // const bd = data;
-    // const mapeado = bd.data?.map( (curso) => {
-    //   return {
-    //     key: curso.id,
-    //     nombre: curso.attributes.nombre,
-    //     nivel: curso.attributes.nivel,
-    //     descripcion: curso.attributes.descripcion,
-    //     modulos: curso.attributes.modulos,
-    //     profesor: curso.attributes.profesor,
-    //     duracion: curso.attributes.duracion,
-    //     likes: curso.attributes.likes,
-    //     disponible: curso.attributes.disponible,
-    //     imagen: curso.attributes.imagen_url
-    //   }
 
-      
-    // });
+  useEffect(() => {
+    // Verifica si el token está presente al cargar el componente
+    redirectIfTokenMissing();
+  }, []);
+
+  const redirectIfTokenMissing = () => {
+    const token = localStorage.getItem("token");
+    if (!token && !user) {
+      //Redirige al usuario a la página de inicio de sesión si no hay un token válido
+      navigate("/");
+    }
+  };
+
+
+
 
     console.log(state)
   
@@ -39,6 +37,9 @@ export function DetalleCurso() {
 
   return (
     <>
+    <div>
+      <Header />
+    </div>
       <div>
       <SimpleGrid
           spacing={10}
@@ -59,14 +60,14 @@ export function DetalleCurso() {
               <p>{state?.attributes?.descripcion}</p>
             </TabPanel>
             <TabPanel>
-              <ModulosCursos />
+              
             </TabPanel>
           </TabPanels>
         </Tabs>
         </SimpleGrid>
       </div>
       <div>
-      <CarouselCursos />
+      
       </div>
     </>
   );
