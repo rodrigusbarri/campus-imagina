@@ -4,7 +4,7 @@ import { MyRoutes } from "./routers/routes";
 import { useEffect } from "react";
 import { useState } from "react";
 import Header from "./components/Header";
-
+import { ModalRuta } from "./pages/ruta/components/ModalRuta";
 
 
 

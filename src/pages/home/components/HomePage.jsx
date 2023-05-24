@@ -1,5 +1,5 @@
 import React from "react";
-import { CardCursos } from "../pages/cursos/components/CardCursos";
+import { CardCursos } from "../../cursos/components/CardCursos";
 
 import {
   Card,
@@ -15,14 +15,14 @@ import {
   WrapItem,
   CardHeader,
   CardBody,
-  CardFooter 
+  CardFooter,
 } from "@chakra-ui/react";
 import { FaCode, FaJava } from "react-icons/fa";
 import { BsDisplay, BsStack } from "react-icons/bs";
 import { FiServer } from "react-icons/fi";
 import { ImHtmlFive2, ImCss3 } from "react-icons/im";
 import { useContext } from "react";
-import { UserContext } from "../routers/routes";
+import { UserContext } from "../../../routers/routes";
 import {
   SiJavascript,
   SiPython,
@@ -30,6 +30,7 @@ import {
   SiTypescript,
   SiCsharp,
 } from "react-icons/si";
+import { ModalRuta } from "../../ruta/components/ModalRuta";
 
 export function HomePage() {
   const user = useContext(UserContext);
@@ -64,15 +65,12 @@ export function HomePage() {
                     margin={9}
                   >
                     <Wrap spacing={3}>
-                      <Button alignItems={"center"} background={'#C6F6D5'}>
-                        <FaCode />
-                        &nbsp;Aprende a programar
-                      </Button>
-                      <Button alignItems={"center"} background={'#FAF089'}>
+                    <ModalRuta />
+                      <Button alignItems={"center"} background={"#FAF089"}>
                         <BsDisplay />
                         &nbsp;Frontend
                       </Button>
-                      <Button alignItems={"center"} background={'#FAF089'}>
+                      <Button alignItems={"center"} background={"#FAF089"}>
                         <FiServer />
                         &nbsp;Backend
                       </Button>
@@ -143,15 +141,16 @@ export function HomePage() {
               <Divider />
               <Card>
                 <CardBody>
-                  <Text>Si eres desarrollador y tienes los conocimientos puedes subir tus cursos en nuestra plataforma
-                    y compartir tus conocimientos con otras personas.
+                  <Text>
+                    Si eres desarrollador y tienes los conocimientos puedes
+                    subir tus cursos en nuestra plataforma y compartir tus
+                    conocimientos con otras personas.
                   </Text>
                 </CardBody>
-                <CardFooter >
+                <CardFooter>
                   <Button>Empieza aquí</Button>
                 </CardFooter>
               </Card>
-              
             </Card>
             <Card w={80}>
               <Heading as="h4" size="md" margin="5">

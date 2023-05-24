@@ -1,7 +1,7 @@
 import "./styles/Header.css";
 import React from "react";
 import { ButtonSidebar } from "./utils/ButtonSidebar";
-import { Text, Stack, Input, IconButton, Image, Box,SimpleGrid } from "@chakra-ui/react";
+import { Text, Stack, Input, IconButton, Image, Box,SimpleGrid, useColorModeValue, } from "@chakra-ui/react";
 import { Search } from "./utils/Search";
 import { ButtonPerfil } from "./utils/ButtonPerfil";
 import { ButtonToggle } from "./utils/ButtonToggle";
@@ -29,8 +29,8 @@ const Header = () => {
 
   return (
     <header className="header-container">
-      <Stack direction="row" spacing={2} align="center">
-        <SimpleGrid columns={[2, null, 3]} spacing='-1' margin={''}>
+      <Stack direction="row" spacing={2} align="center" bg={useColorModeValue('white', 'gray.800')}  color={useColorModeValue('gray.800', 'white')}>
+        <SimpleGrid columns={[2, null, 3]} spacing='-1' margin={'auto'}>
           <Box height="60px" w={'16'} >
             <Image
             margin={'1'}

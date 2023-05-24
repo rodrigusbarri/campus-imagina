@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import { HomePage } from "../../components/HomePage";
+import { HomePage } from "../home/components/HomePage";
 import "../home/styles/Home.css";
 import { UserContext } from "../../routers/routes";
 
