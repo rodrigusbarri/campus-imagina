@@ -22,7 +22,7 @@ import {
   VStack,
   Badge,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { UserApi } from "../../../api/UserApi";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -30,9 +30,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 export function CardCursos() {
   const { data, loading, error } = UserApi(import.meta.env.VITE_URL_API_CURSOS);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedCurso, setSelectedCurso] = React.useState(null);
+  const [selectedCurso, setSelectedCurso] = useState(null);
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [showAll, setShowAll] = useState(false);
 
   const openModal = (curso) => {
     setSelectedCurso(curso);
@@ -58,30 +59,31 @@ export function CardCursos() {
           spacing={4}
           templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
         >
-          {data?.map((curso) => (
+          {(showAll ? data : data?.slice(0, 4))?.map((curso) => (
             <Card
-              key={curso.id}
+              key={curso?.id}
               onClick={() => openModal(curso)}
               cursor="pointer"
               _hover={{ bg: "blue.100" }}
             >
               <CardBody>
-                <Image src={curso.attributes.imagen_url} borderRadius="lg" />
+                <Image src={curso?.attributes?.imagen_url} borderRadius="lg" />
                 <Stack mt="4" spacing="3">
                   <Heading as="h4" size="md">
-                    {curso.attributes.nombre}
+                    {curso?.attributes?.nombre}
                   </Heading>
                 </Stack>
               </CardBody>
               <Divider />
               <CardFooter>
                 <Text color="black.600" fontSize="md" align="right">
-                  Nivel: {curso.attributes.nivel}
+                  Nivel: {curso?.attributes?.nivel}
                 </Text>
               </CardFooter>
             </Card>
           ))}
         </SimpleGrid>
+
         <section>
           <Stack direction="column">
             <Box
@@ -95,13 +97,14 @@ export function CardCursos() {
               mb={2}
             >
               <Button
+                onClick={() => setShowAll(!showAll)}
                 size="lg"
                 rightIcon={<ArrowRightIcon />}
                 colorScheme="twitter"
                 variant="solid"
                 align="center"
               >
-                Ver todos los cursos
+                {showAll ? "Ver menos" : "Mostrar todos los cursos"}
               </Button>
             </Box>
           </Stack>

@@ -66,7 +66,7 @@ export function HomePage() {
                   >
                     <Wrap spacing={3}>
                     <ModalRuta />
-                      <Button alignItems={"center"} background={"#FAF089"}>
+                      {/* <Button alignItems={"center"} background={"#FAF089"}>
                         <BsDisplay />
                         &nbsp;Frontend
                       </Button>
@@ -77,7 +77,7 @@ export function HomePage() {
                       <Button alignItems={"center"} colorScheme="red">
                         <BsStack />
                         &nbsp;Full Stack Developer
-                      </Button>
+                      </Button> */}
                     </Wrap>
                   </ButtonGroup>
                 </Box>
@@ -183,8 +183,6 @@ export function HomePage() {
           </SimpleGrid>
         </SimpleGrid>
       </>
-
-      <h2>Inicia sesión para ver el contenido</h2>
     </div>
   );
 }
